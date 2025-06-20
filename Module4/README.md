@@ -39,8 +39,3 @@ biblio.lister_livres_disponibles()
 Livre: classe représentant un livre individuel.
 
 Bibliotheque: classe contenant une liste de livres et leurs statuts.
-
- Prérequis
-Python 3.x
- Licence
-Ce projet est open-source, n’hésite pas à le modifier ou à le réutiliser.
