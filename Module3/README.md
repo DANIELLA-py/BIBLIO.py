@@ -1,48 +1,62 @@
-Huffman Compressor
+ Module 3 – Algorithmes de Tri (sort_engine.py)
 
-Un compresseur de fichiers basé sur l'algorithme de compression de Huffman.
+Objectif
 
-Fonctionnalités
+Ce module permet d’implémenter et de comparer différents algorithmes de tri appliqués à une liste de livres. Les tris peuvent être effectués selon plusieurs critères : titre, auteur ou année de publication.
+ Fonctions principales
+ Algorithmes de tri implémentés :
+- **Tri à bulles (bubble_sort)**
+- **Tri par insertion (insertion_sort)**
+- **Tri fusion (récursif) (merge_sort)** (optionnel mais recommandé)
 
-- Analyse des fréquences d'un fichier binaire.
-- Construction d’un arbre de Huffman.
-- Compression des données avec génération d’un encodage binaire.
-- Écriture du fichier compressé incluant un en-tête avec les métadonnées nécessaires à la décompression.
+Chaque algorithme peut trier une liste de dictionnaires (livres) selon une clé (titre, auteur, annee).
 
-Algorithme
+Comparaison des performances
 
-L'algorithme de Huffman compresse les données en attribuant des codes binaires plus courts aux symboles fréquents et des codes plus longs aux symboles rares. Il repose sur un arbre binaire construit à partir des fréquences d'apparition des octets du fichier.
+Fonction : compare_sorts(livres, key)
 
-Structure du projet
+- Compare le temps d'exécution de chaque algorithme pour un même jeu de données.
+- Retourne les résultats triés et le temps d'exécution pour chaque méthode.
 
 
-Utilisation
-project/
-│
-├── compressor.py # Contient la fonction compress()
-├── huffman_tree.py # Construction de l’arbre et génération des codes
-├── frequency_analyzer.py # Analyse des fréquences et file de priorité
-├── decompressor.py # (Optionnel) pour décompresser les fichiers
-├── example.txt # Exemple de fichier à compresser
-└── README.md # Ce fichier
-Compression
+Structure attendue des livres
+
+Chaque livre est un dictionnaire au format suivant :
 
 python
-from compressor import compress
+{
+    "titre": "1984",
+    "auteur": "George Orwell",
+    "annee": 1949
+}
 
-compress("example.txt", "example.huff")
 
-from decompressor import decompress
+Fonctions utilitaires
 
-decompress("example.huff", "example_decompressed.txt")
 
-Ce projet utilise uniquement les modules standards de Python (aucune bibliothèque externe requise).
+Exemple d'utilisation
 
-Python ≥ 3.9 (utilise l'opérateur := de l’instruction while (byte := f.read(1)))
-Avant compression
-Contenu de example.txt :
-"Bonjour bonjour bonjour"
-Taille : 24 octets
-Après compression
-Contenu de example.huff :
-Taille : ~12–16 octets (selon la répétition des caractères)
+from sort_engine import trier_par_titre, compare_sorts
+
+livres = [
+    {"titre": "Zola", "auteur": "Emile Zola", "annee": 1885},
+    {"titre": "L'Étranger", "auteur": "Albert Camus", "annee": 1942},
+    {"titre": "1984", "auteur": "George Orwell", "annee": 1949},
+]
+
+Tri simple
+print(trier_par_titre(livres))
+
+Comparaison des tris
+resultats = compare_sorts(livres, key='annee')
+for nom_algo, data in resultats.items():
+    print(f"{nom_algo}: {data['temps']}s")
+
+
+Objectifs d’auto-apprentissage
+
+Comprendre les différences de complexité entre les algorithmes (O(n²) vs O(n log n)).
+
+Utiliser la récursivité pour des tris plus performants.
+
+Appliquer le tri sur des objets complexes avec des clés multiple
